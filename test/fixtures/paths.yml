@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prompt: MyString
+  decision1: MyString
+  decision2: MyString
+  path_id: MyString
+  story_id: MyString
+
+two:
+  prompt: MyString
+  decision1: MyString
+  decision2: MyString
+  path_id: MyString
+  story_id: MyString

@@ -1,0 +1,15 @@
+<div class="container">
+	<section class="header">
+		<div class="row">
+			<h1 class="title">Hello!</h1>
+		</div>
+		<div class="row" style="text-align: center; margin-top: 5%">
+			<div class="six columns">
+				<%= button_to "Checkout some stories!", "/stories", :method => :get %>
+			</div>
+			<div class="six columns">
+				<%= button_to "Make a story!", "/stories/new", :method => :get %>
+			</div>
+		</div>
+	</section>
+</div>

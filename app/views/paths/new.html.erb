@@ -1,0 +1,31 @@
+
+<div class = "header">
+	<div class = "title">
+		<%= @story.title %>
+	</div>
+</div>
+<div class="eight columns offset-by-two" >
+	<%= form_with scope: :path, url: story_paths_path, local: true do |form| %>
+			<p>
+			<%= form.label :prompt %><br>
+			<%= form.text_area :prompt, class: "u-full-width prompt-area" %>
+			</p>
+
+			<p>
+			<%= form.label :decision_1 %><br>
+			<%= form.text_field :decision1, class: "u-full-width" %>
+			</p>
+
+			<p>
+			<%= form.label :decision_2 %><br>
+			<%= form.text_field :decision2, class: "u-full-width" %>
+			</p>
+
+			<%= hidden_field_tag :path_id, "0" %>
+			<%= hidden_field_tag :ended, false %>
+
+		<p>
+			<%= form.submit %>
+		</p>
+	<% end %>
+<div>

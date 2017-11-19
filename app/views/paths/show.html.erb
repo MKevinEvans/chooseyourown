@@ -1,0 +1,124 @@
+<div class = "header">
+	<div class = "title">
+		<%= @paths.last.story.title %>
+	</div>
+</div>
+<% @paths.each do |path| %>
+	<% if path.path_id == @path_id %>
+		<div id="last_prompt">
+	<% else %>
+		<div>
+	<% end %>
+		<h2>
+			<strong><%= path.prompt %></strong>
+		</h2>
+	</div>
+	<div class="row">
+		<div class="five columns">
+		<% unless path.ended %>
+			<% unless path.next_zero %> 
+				<div class="unfinished">
+				<h3> <%= path.decision1 %> </h3>
+				<p style="text-align: center">
+					and then what happens next?
+				</p>
+				<%= form_with scope: :path, url: story_paths_path, local: true do |form| %>
+					<p>
+						<%= form.label :prompt %><br>
+						<%= form.text_area :prompt, class: "u-full-width prompt-area" %>
+					</p>
+
+					<p>
+						<%= form.label :decision_1 %><br>
+						<%= form.text_field :decision1, class: "u-full-width" %>
+					</p>
+					
+					<p>
+						<%= form.label :decision_2 %><br>
+						<%= form.text_field :decision2, class: "u-full-width" %>
+					</p>
+
+					<p>	
+						<%= form.label 'End this path here?' %>
+						<%= form.check_box :ended %>
+					</p>
+
+					<p>
+						<%= hidden_field_tag :path_id, path.path_id+"0" %>
+					</p>
+
+					<p>
+						<%= form.submit %>
+					</p>
+				</div>
+				<% end %>
+			<% else %>
+				<% if path.path_id+"0" == @paths.last.path_id[0..path.path_id.length] %>
+					<% button_type = "button-primary" %>
+				<% else %>
+					<% button_type = "" %>
+				<% end %>
+					<%= button_to path.decision1, path.path_id+"0", :method => "get", class: button_type %>	
+			<% end %>
+		</div>
+		<div class="two columns" style="text-align: center; padding-top: 25px">or</div>
+		<div class="five columns" style="text-align: right">
+			<% unless path.next_one || path.ended %> 
+				<div class="unfinished" style="text-align: left">
+				<h3> <%= path.decision2 %> </h3>
+				<p style="text-align: center">
+					and then what happens next?
+				</p>
+				<%= form_with scope: :path, url: story_paths_path, local: true do |form| %>
+					<p>
+						<%= form.label :prompt %><br>
+						<%= form.text_area :prompt, class: "u-full-width prompt-area" %>
+					</p>
+
+					<p>
+						<%= form.label :decision_1 %><br>
+						<%= form.text_field :decision1, class: "u-full-width" %>
+					</p>
+					
+					<p>
+						<%= form.label :decision_2 %><br>
+						<%= form.text_field :decision2, class: "u-full-width" %>
+					</p>
+
+					<p>
+						<%= hidden_field_tag :path_id, path.path_id+"1" %>
+					</p>
+
+					<p>	
+						<%= form.label 'End this path here?' %>
+						<%= form.check_box :ended %>
+					</p>
+
+					<p>
+						<%= form.submit %>
+					</p>
+				</div>
+				<% end %>
+			<% else %>
+				<% if path.path_id+"1" == @paths.last.path_id[0..path.path_id.length] %>
+					<% button_type = "button-primary" %>
+				<% else %>
+					<% button_type = "" %>
+				<% end %>
+				<%= button_to path.decision2, path.path_id+"1", :method => "get", class: button_type %>
+
+			<% end %>	
+		<% end %>
+		</div>
+	</div>
+<% end %>
+<% if @paths.length != 1 %>
+	<div style="text-align: center; margin-top: 10px;">
+		<%= button_to "back to the start", "0", :method => "get" %> 
+	</div>
+<% end %>
+<script>
+	(function scrollToPrompt() {
+		window.scrollTo(0, (document.getElementById("last_prompt").offsetTop))
+	})()
+</script>

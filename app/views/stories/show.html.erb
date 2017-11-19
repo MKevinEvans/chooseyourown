@@ -1,0 +1,28 @@
+<div class = "header">
+	<div class = "title">
+		<%= @story.title %>
+	</div>
+</div>
+<div style="text-align: center">
+<% if @paths.length === 0 %>
+<p><%= button_to "Start a path", "/stories/#{@story.id}/paths/new", :method => :get %></p>
+
+<% else %>
+<p>
+	<%= button_to "Start at the beginning", "/stories/#{@story.id}/paths/0", :method => :get %>
+</p>
+
+<p> or Jump to a decision point</p>
+</div>
+<% end %>
+<% @paths.each do |path| %>
+	<% if path.prompt.length > 30 %>
+		<% link_preview = path.prompt[0..30]+"..." %>
+		<% else %>
+		<% link_preview = path.prompt %>
+		<% end %>
+
+<p>
+	<%= button_to link_preview, "/stories/#{@story.id}/paths/#{path.path_id}", :method => :get %>
+</p>
+<% end %>

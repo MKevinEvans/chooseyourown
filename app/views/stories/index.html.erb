@@ -1,0 +1,19 @@
+<div class = "header">
+	<div class = "title">
+		Checkout these stories
+	</div>
+</div>
+<% @stories.each do |story| %>
+<% if story.title == ""%>
+	<% story.title = "untitled" %>
+<% end %>
+
+<div class="row">
+	<div class="six columns">
+		<%= button_to story.title, "/stories/#{story.id}/", :method => :get %>
+	</div>
+	<div class="six columns">
+		This story has <%= story.paths.length %> different paths to go on!
+	</div>
+</div>
+<% end %>
