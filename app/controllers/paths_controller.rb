@@ -24,6 +24,17 @@ class PathsController < ApplicationController
 		@story = Story.find(params[:story_id])
 	end
 
+	def edit
+		@story = Story.find(params[:story_id])
+		@path = Path.find_by(path_id: params[:id], story_id: params[:story_id])
+	end
+
+	def update
+		@path = Path.find_by(path_id: params[:id], story_id: params[:story_id])
+    	@path.update_attributes(prompt: params[:path][:prompt], decision1: params[:path][:decision1], decision2: params[:path][:decision2])
+    	redirect_to "/stories/#{@path.story_id}/paths/#{@path.path_id}"
+  	end
+
 	def create
 		@story = Story.find(params[:story_id])
 		@path = Path.new(prompt: params[:path][:prompt], decision1: params[:path][:decision1], decision2: params[:path][:decision2], path_id: params[:path_id], story_id: params[:story_id], ended: params[:ended])

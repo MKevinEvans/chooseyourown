@@ -1,0 +1,17 @@
+
+    <div class="six columns offset-by-three" style="padding-top: 20px;">
+    	<%= form_with scope: :story, url: story_path(@story), :method => "patch", local: true do |form| %>
+		<div style="text-align: center">
+			<%= form.label :title %><br>
+			<%= form.text_field :title, :value => @story.title, class: "u-full-width"%>
+		</p>
+
+		<p>
+			<%= hidden_field_tag :story_id, @story.id %>
+		</p>
+
+		<p>
+			<%= form.submit %>
+		</p>
+	<% end %>
+	</div>

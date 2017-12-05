@@ -1,6 +1,8 @@
 <div class = "header">
-	<div class = "title">
-		<%= @paths.last.story.title %>
+	<div class= "row">
+		<div class = "title">
+			<%= @paths.last.story.title %> <%= button_to 'Edit', edit_story_path(@paths.last.story), :method => :get %>
+		</div>
 	</div>
 </div>
 <% @paths.each do |path| %>
@@ -13,6 +15,7 @@
 			<strong><%= path.prompt %></strong>
 		</h2>
 	</div>
+	<%= button_to 'Edit', "/stories/#{path.story.id}/paths/#{path.path_id}/edit", :method => "get" %>
 	<div class="row">
 		<div class="five columns">
 		<% unless path.ended %>
