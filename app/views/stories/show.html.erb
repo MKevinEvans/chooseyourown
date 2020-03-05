@@ -9,7 +9,7 @@
 
 <% else %>
 <p>
-	<%= button_to "Start at the beginning", "/stories/#{@story.id}/paths/0", :method => :get %>
+	<%= button_to "Start at the beginning", "/stories/#{@story.id}/paths/0", :method => :get, class: "button-primary" %>
 </p>
 
 <p> or Jump to a decision point</p>
